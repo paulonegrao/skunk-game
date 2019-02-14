@@ -78,7 +78,7 @@ ola.....
 	var eventSource = null;
 	function seat() {
 		console.log("seating...");
-		source = new EventSource('http://skunkgame.herokuapp.com/SkunkGame',  {withCredentials: true});
+		source = new EventSource('https://skunkgame.herokuapp.com/SkunkGame',  {withCredentials: true});
 		/*eventSource.onopen 		= function() {};
 		eventSource.onmessage 	= function(message) {console.log(message.data)};
 		eventSource.onerror	 	= function(merr) {console.log("error..." + merr)};*/
