@@ -78,7 +78,7 @@ ola.....
 	var eventSource = null;
 	function seat() {
 		console.log("seating...");
-		source = new EventSource('http://localhost:8080/SkunkGame');
+		source = new EventSource('http://localhost:8080/SkunkGame',  {withCredentials: true});
 		/*eventSource.onopen 		= function() {};
 		eventSource.onmessage 	= function(message) {console.log(message.data)};
 		eventSource.onerror	 	= function(merr) {console.log("error..." + merr)};*/

@@ -1,3 +1,5 @@
+package servlet;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -67,6 +69,12 @@ public class SkunkGame extends HttpServlet {
 		response.setContentType("text/event-stream");
 		response.setHeader("Cache-Control", "no-cache");
 		response.setHeader("Connection", "keep-alive");
+		
+		// CORS stuff
+		response.setHeader("Access-Control-Allow-Origin", "http://skunkgame.herokuapp.com/");
+		response.setHeader("Access-Control-Expose-Headers", "*");
+		response.setHeader("Access-Control-Allow-Credentials", "true");
+		
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter printWriter = null;
 
