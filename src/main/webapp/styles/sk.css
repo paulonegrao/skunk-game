@@ -14,7 +14,7 @@
 	display: flex;
     justify-content: center; 
 }
-.skl {
+.normal {
     width: 15%;
     padding: 0px;
     height: 100px;
@@ -25,4 +25,15 @@
 }
 .skl img {
 	width: 100%;
+}
+.off {
+	opacity: 0.2;
+	cursor: none;
+}
+.up {
+	opacity: 1;
+	cursor: enable;
+]
+#skin_player_1 .down{
+	background-image: url("skp_dow_1");
 }

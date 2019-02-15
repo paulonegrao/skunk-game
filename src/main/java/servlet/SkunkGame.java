@@ -3,7 +3,9 @@ package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Random;
+import java.util.Vector;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,7 +31,9 @@ public class SkunkGame extends HttpServlet {
 	private Random r = new Random();
 
 	private String skin;
-
+	
+	private Vector<PrintWriter> listeners = new Vector<>();
+	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -45,21 +49,19 @@ public class SkunkGame extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException
+	{
 		// TODO Auto-generated method stub
-		/*
-		 * response.getWriter().append("Served at: ").append(request.getContextPath());
-		 */
+		
+		 //response.getWriter().append("Served at: ").append(request.getContextPath());
+		 
 
-		/*
-		 * skin = request.getParameter("skin");
-		 *
-		 * System.out.println("olha aqui...." + skin);
-		 *
-		 *
-		 * if ((gameStatus == "New") && (skin == null)) {
-		 *
-		 * /*request.setAttribute("result", gameStatus);
+
+		 skin 		= request.getParameter("skin");
+		 //skinAction = request.getParameter("action");
+
+
+		 /*request.setAttribute("result", gameStatus);
 		 * request.getRequestDispatcher("/t1.jsp").forward(request, response);
 		 * System.out.println("passo1...." + skin);
 		 *
@@ -69,12 +71,12 @@ public class SkunkGame extends HttpServlet {
 		response.setContentType("text/event-stream");
 		response.setHeader("Cache-Control", "no-cache");
 		response.setHeader("Connection", "keep-alive");
-		
+
 		// CORS stuff
-		response.setHeader("Access-Control-Allow-Origin", "https://skunkgame.herokuapp.com/");
-		response.setHeader("Access-Control-Expose-Headers", "*");
-		response.setHeader("Access-Control-Allow-Credentials", "true");
-		
+		//response.setHeader("Access-Control-Allow-Origin", "https://skunkgame.herokuapp.com/");
+		//response.setHeader("Access-Control-Expose-Headers", "*");
+		//response.setHeader("Access-Control-Allow-Credentials", "true");
+
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter printWriter = null;
 
@@ -84,43 +86,93 @@ public class SkunkGame extends HttpServlet {
 		System.out.println("passo2...." + skinAction);
 		oldFace = newFace;
 
-		try {
+	    try {
+	        response.setContentType("text/html;charset=UTF-8");
+	        String param = "";
+	
+	
+	
+	        // Is this a message subsciption request?
+	        param = request.getParameter("msg");
+	        if ( param != null && param.length() > 0 ) {
+	            System.out.println("Setting up new event listener");
+	
+	            // set content type and header
+	            response.setContentType("text/event-stream");
+	            response.setCharacterEncoding("UTF-8");
+	            response.setHeader("Connection", "keep-alive");
+	
+	            // Store until a message needs to be sent
+	            PrintWriter out = response.getWriter();
+	            synchronized ( listeners ) {
+	                listeners.add(out);
+	            }
+	            sendUpdate("teste", "...........caraca..........");
+	        }
+	    }
+	    catch ( Exception e ) {
+	        e.printStackTrace();
+	    }
+	}
 
-			printWriter = response.getWriter();
-			printWriter.write("event: message\n");
-			/* printWriter.write("data: " + skin + "testando essa encrenca\r\n"); */
-			printWriter.write("retry: 300000\n");
-			printWriter.write("data: ” + “start” + “\n\n");
-			System.out.println("printei...." + skinAction);
-			//printWriter.flush();
-			/*
-			 * printWriter.print("data: " + skin + ".." + skinAction + ".." + skin +
-			 * " Oldinho was " + oldFace + " .You have trhew " + newFace);
-			 */
-			while (true) {
-				double randomNumber = Math.random() * 3000;
-				printWriter.write(": \n\n");
-				if (printWriter.checkError()) {
-					System.out.println("erro breakando...." + skinAction);
-					// Subscriber error, break out of loop
-					break;
-				}
-				/* response.flushBuffer(); */
-				Thread.sleep((long) randomNumber);
-			}
-			return;
-		} catch (IOException e) {
-			printWriter.close();
-			System.out.println("erro no catch...." + skinAction);
-		} catch (InterruptedException e) {
-			printWriter.close();
-			System.out.println("erro no catch...." + skinAction);
-		}
-		/* } */
+	private void removeListener(PrintWriter out) {
+	      synchronized ( listeners ) {
+	          listeners.removeElement(out);
+	          if ( listeners.size() == 0 ) {
+	              System.out.println("No more subscribers");
+	          }
+	      }
 	}
 
 	public int getRandom(int randSeed, int randRange) {
 		return r.nextInt(randRange) + randSeed;
 	}
 
+    private void sendUpdate(String type, String msg) {
+      try {
+          if ( listeners == null || listeners.isEmpty() )
+              return;
+
+          // Copy the list of listeners to safely iterate
+          //
+          Vector<PrintWriter> toSend;
+          synchronized ( listeners ) {
+              toSend = (Vector<PrintWriter>)listeners.clone();
+          }
+
+          // Send update to all listeners
+          //
+          Iterator<PrintWriter> iter = toSend.iterator();
+          while ( iter.hasNext() ) {
+              PrintWriter out = iter.next();
+              if ( out == null ) {
+                  continue;
+              }
+
+              try {
+                  // Send SSE update
+                  //
+                  if ( type.length() > 0 ) {
+                      System.out.println("SSE Sending data: " + msg);
+                      out.write("event: message\n");
+                      out.write("data: " + msg + "\n\n");
+                      out.flush();
+                  }
+              }
+              catch( Exception e ) {
+                  // Bad listener. Remove from original list and move on
+                  System.out.println("Listener error: " + e.toString() );
+                  e.printStackTrace();
+
+                  try {
+                      removeListener(out);
+                  }
+                  catch ( Exception e1 ) { }
+              }
+          }
+      }
+      catch ( Exception e ) {
+          e.printStackTrace();
+      }
+  }
 }
