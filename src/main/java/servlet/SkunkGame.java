@@ -72,10 +72,6 @@ public class SkunkGame extends HttpServlet {
 		response.setHeader("Cache-Control", "no-cache");
 		response.setHeader("Connection", "keep-alive");
 
-		// CORS stuff
-		//response.setHeader("Access-Control-Allow-Origin", "https://skunkgame.herokuapp.com/");
-		//response.setHeader("Access-Control-Expose-Headers", "*");
-		//response.setHeader("Access-Control-Allow-Credentials", "true");
 
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter printWriter = null;
@@ -101,6 +97,10 @@ public class SkunkGame extends HttpServlet {
 	            response.setContentType("text/event-stream");
 	            response.setCharacterEncoding("UTF-8");
 	            response.setHeader("Connection", "keep-alive");
+	         // CORS stuff
+	    		response.setHeader("Access-Control-Allow-Origin", "https://skunkgame.herokuapp.com/");
+	    		response.setHeader("Access-Control-Expose-Headers", "*");
+	    		response.setHeader("Access-Control-Allow-Credentials", "true");
 	
 	            // Store until a message needs to be sent
 	            PrintWriter out = response.getWriter();

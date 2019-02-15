@@ -53,7 +53,7 @@ ola.....
 					<button  onclick='seat()'><img src="images/skp_up_1.png" alt="Submit Form"></button>
 				</div>
 				<div id="skin_player_1" class="skp">
-					<button ><img src="images/sk_red_s.png" alt="Submit Form"></button>
+					<button onclick='seat2()'><img src="images/sk_red_s.png" alt="Submit Form"></button>
 				</div>
 				<div id="skin_player_1" class="skp">
 					<button ><img src="images/sk_red_s.png" alt="Submit Form"></button>
@@ -80,6 +80,26 @@ ola.....
 		console.log("seating...");
 		//source = new EventSource('http://skunkgame.herokuapp.com/SkunkGame',  {withCredentials: true});
 		source = new EventSource('http://localhost:8080/SkunkGame?msg=xxx');
+		/*eventSource.onopen 		= function() {};
+		eventSource.onmessage 	= function(message) {console.log(message.data)};
+		eventSource.onerror	 	= function(merr) {console.log("error..." + merr)};*/
+		source.addEventListener('message', function(e) {
+			  console.log(e.data);
+			}, false);
+
+			source.addEventListener('open', function(e) {
+			  // Connection was opened.
+			}, false);
+
+			source.addEventListener('error', function(e) {
+			  if (e.readyState == EventSource.CLOSED) {
+			    // Connection was closed.
+			  }
+			}, false);
+	}
+	function seat2() {
+		console.log("seating...");
+		source = new EventSource('http://skunkgame.herokuapp.com/SkunkGame?msg=xxx',  {withCredentials: true});
 		/*eventSource.onopen 		= function() {};
 		eventSource.onmessage 	= function(message) {console.log(message.data)};
 		eventSource.onerror	 	= function(merr) {console.log("error..." + merr)};*/
