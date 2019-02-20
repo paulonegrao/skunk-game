@@ -1,0 +1,111 @@
+<html>
+
+<head>
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+     <link rel="stylesheet" media="all" href="styles/d1.css" />
+
+     <link rel="shortcut icon" href="images/favicon.ico">
+     <script src="js/modernizr-2.6.2.min.js"></script>
+<style type="text/css">
+* { box-sizing: border-box; }
+
+body { font-family: sans-serif; }
+
+  .stage {
+  width: 120px;
+  height: 120px;
+  border: 1px solid #CCC;
+  margin: 80px;
+  perspective: 400px;
+  }
+  
+  .cubespinner{
+  width: 120px;
+  height: 120px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: translateZ(-100px);
+  transition: transform 500ms;
+  }
+  
+  .cubespinner.front{
+  -webkit-transform:translateZ(60px);
+  -moz-transform:translateZ(60px);
+  -ms-transform:translateZ(60px);
+  transform: translateZ(-100px) rotateY(0deg);
+  }
+  
+  .cubespinner.back{
+  -webkit-transform:rotateY(90deg) translateZ(60px);
+  -moz-transform:rotateY(90deg) translateZ(60px);
+  -ms-transform:rotateY(90deg) translateZ(60px);
+  transform: translateZ(-100px) rotateX(180deg);
+  }
+  
+  .cubespinner.right{
+  -webkit-transform:rotateY(90deg) rotateX(90deg) translateZ(60px);
+  -moz-transform:rotateY(90deg) rotateX(90deg) translateZ(60px);
+  -ms-transform:rotateY(90deg) rotateX(90deg) translateZ(60px);
+  transform: translateZ(-100px) rotateY(-90deg);
+  }
+  
+  .cubespinner.left{
+  -webkit-transform:rotateY(180deg) rotateZ(90deg) translateZ(60px);
+  -moz-transform:rotateY(180deg) rotateZ(90deg) translateZ(60px);
+  -ms-transform:translateZ(-100px) rotateY(180deg);
+  transform: translateZ(-100px) rotateY(90deg);
+  }
+  
+  .cubespinner.top{
+  -webkit-transform:rotateY(-90deg) rotateZ(90deg) translateZ(60px);
+  -moz-transform:rotateY(-90deg) rotateZ(90deg) translateZ(60px);
+  -ms-transform:rotateY(-90deg) rotateZ(90deg) translateZ(60px);
+  transform: translateZ(-100px) rotateX(-90deg);
+  }
+  
+  .cubespinner.bottom{
+  -webkit-transform:rotateX(-90deg) translateZ(60px);
+  -moz-transform:rotateX(-90deg) translateZ(60px);
+  -ms-transform:rotateX(-90deg) translateZ(60px);
+  transform: translateZ(-100px) rotateX(90deg);
+  }
+  
+  .cube__face {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 120px;
+  height: 120px;
+  border:0px solid #ccc;
+  text-align: center;
+  }
+
+  
+.cube__face--front  { transform: rotateY(0deg) translateZ(60px); }
+.cube__face--back   { transform: rotateX(-180deg) translateZ(60px); }
+.cube__face--right  { transform: rotateY(90deg) translateZ(60px); }
+.cube__face--left   { transform: rotateY(-90deg) translateZ(60px); }
+.cube__face--top    { transform: rotateX(90deg) translateZ(60px); }
+.cube__face--bottom { transform: rotateX(-90deg) translateZ(60px); }
+ </style>
+ </head>
+ <body>
+
+
+	<div class="stage">
+		<div class="cubespinner">
+			<div class="cube__face cube__face--front"><img src="/images/seis.png"></div>
+			<div class="cube__face cube__face--back"><img src="/images/jason.png"></div>
+			<div class="cube__face cube__face--right"><img src="/images/cinco.png"></div>
+			<div class="cube__face cube__face--left"><img src="/images/dois.png"></div>
+			<div class="cube__face cube__face--top"><img src="/images/treis.png"></div>
+			<div class="cube__face cube__face--bottom"><img src="/images/quatro.png"></div>
+		</div>
+	</div>
+	<div>*******************************</div>
+
+	<div id="show">front</div>
+
+</body>
+
+      <script src="script/p4.js"></script>
+</html>
