@@ -21,37 +21,35 @@
 
 
 		<div id="overlay">
-		<div class=box>
-			<div id="cube1" class="cube1">
-				<div class="cube1_face cube1_face_front"><img src="/images/seis.png"></div>
-				<div class="cube1_face cube1_face_back"><img src="/images/jason.png"></div>
-				<div class="cube1_face cube1_face_right"><img src="/images/cinco.png"></div>
-				<div class="cube1_face cube1_face_left"><img src="/images/dois.png"></div>
-				<div class="cube1_face cube1_face_top"><img src="/images/treis.png"></div>
-				<div class="cube1_face cube1_face_bottom"><img src="/images/quatro.png"></div>
-			</div>
-			<div id="cube2" class="cube2">
-				<div class="cube2_face cube2_face_front"><img src="/images/seis.png"></div>
-				<div class="cube2_face cube2_face_back"><img src="/images/jason.png"></div>
-				<div class="cube2_face cube2_face_right"><img src="/images/cinco.png"></div>
-				<div class="cube2_face cube2_face_left"><img src="/images/dois.png"></div>
-				<div class="cube2_face cube2_face_top"><img src="/images/treis.png"></div>
-				<div class="cube2_face cube2_face_bottom"><img src="/images/quatro.png"></div>
-			</div>
-			<div id="cube3" class="cube3">
-				<div class="cube3_face cube3_face_front"><img src="/images/seis.png"></div>
-				<div class="cube3_face cube3_face_back"><img src="/images/jason.png"></div>
-				<div class="cube3_face cube3_face_right"><img src="/images/cinco.png"></div>
-				<div class="cube3_face cube3_face_left"><img src="/images/dois.png"></div>
-				<div class="cube3_face cube3_face_top"><img src="/images/treis.png"></div>
-				<div class="cube3_face cube3_face_bottom"><img src="/images/quatro.png"></div>
-			</div>
+			<div class=box>
+				<div id="cube1" class="cube1">
+					<div class="cube1_face cube1_face_front"><img src="/images/seis.png"></div>
+					<div class="cube1_face cube1_face_back"><img src="/images/jason.png"></div>
+					<div class="cube1_face cube1_face_right"><img src="/images/cinco.png"></div>
+					<div class="cube1_face cube1_face_left"><img src="/images/dois.png"></div>
+					<div class="cube1_face cube1_face_top"><img src="/images/treis.png"></div>
+					<div class="cube1_face cube1_face_bottom"><img src="/images/quatro.png"></div>
+				</div>
+				<div id="cube2" class="cube2">
+					<div class="cube2_face cube2_face_front"><img src="/images/seis.png"></div>
+					<div class="cube2_face cube2_face_back"><img src="/images/jason.png"></div>
+					<div class="cube2_face cube2_face_right"><img src="/images/cinco.png"></div>
+					<div class="cube2_face cube2_face_left"><img src="/images/dois.png"></div>
+					<div class="cube2_face cube2_face_top"><img src="/images/treis.png"></div>
+					<div class="cube2_face cube2_face_bottom"><img src="/images/quatro.png"></div>
+				</div>
+				<div id="cube3" class="cube3">
+					<div class="cube3_face cube3_face_front"><img src="/images/seis.png"></div>
+					<div class="cube3_face cube3_face_back"><img src="/images/jason.png"></div>
+					<div class="cube3_face cube3_face_right"><img src="/images/cinco.png"></div>
+					<div class="cube3_face cube3_face_left"><img src="/images/dois.png"></div>
+					<div class="cube3_face cube3_face_top"><img src="/images/treis.png"></div>
+					<div class="cube3_face cube3_face_bottom"><img src="/images/quatro.png"></div>
+				</div>
 			
+			</div>
+
 		</div>
-			<div>*******************************</div>
-			<div id="show">front</div>
-		</div>
-	
 	
 		<div class="box">
 			<div>
@@ -99,11 +97,11 @@
 		</div>
 		
 		<div class="box">
-			<div onclick="removeCookies() id="sk_letter_1" class="normal">S</div>
+			<div class="normal">S</div>
 			<div id="sk_letter_2" class="normal">K</div>
 			<div id="sk_letter_3" class="normal">U</div>
 			<div id="sk_letter_4" class="normal">N</div>
-			<div loopFace() id="sk_letter_5" class="normal">K</div>
+			<div class="normal">K</div>
 		</div>
 		
 		<div class="box">
@@ -152,50 +150,74 @@
 		
 		<div class="box">
 			<div>
-				<button id="skunk1_score" class="off">
-					<img src="images/dot.png" alt="skunk 1">
-				</button>
+				<div id="skunk1_score_ride" class="box on">
+					<div class="score_ride"></div>
+					<div class="score_ride"></div>
+					<div class="score_ride"></div>
+					<div class="score_ride"></div>
+					<div class="score_ride"></div>
+				</div>
+				<div id="skunk1_score_total" class="score_total on"></div>
 			</div>
 			<div>
-				<button id="skunk2_score" class="off">
-					<img src="images/dot.png" alt="skunk 2">
-				</button>
+				<div id="skunk2_score_ride" class="box on">
+					<div class="score_ride"></div>
+					<div class="score_ride"></div>
+					<div class="score_ride"></div>
+					<div class="score_ride"></div>
+					<div class="score_ride"></div>
+				</div>
+				<div id="skunk2_score_total" class="score_total on"></div>
 			</div>
 			<div>
-				<button id="skunk3_score" class="off">
-					<img src="images/dot.png" alt="skunk 3">
-				</button>
+				<div id="skunk3_score_ride" class="box on">
+					<div class="score_ride"></div>
+					<div class="score_ride"></div>
+					<div class="score_ride"></div>
+					<div class="score_ride"></div>
+					<div class="score_ride"></div>
+				</div>
+				<div id="skunk3_score_total" class="score_total on"></div>
 			</div>
 			
-			<div class="box">
+			<div>
 				<div>
-					<button id="play_pause" class="off"
-						onclick="skunkMove('skunk4', 'play')">
-						<img src="images/start_s.png" alt="skunk 4" width="70px">
-					</button>
-				</div>
-				<div>
-					<button id="finish" class="off"
-						onclick="skunkMove('skunk4', 'finish')">
-						<img src="images/stop_s.png" alt="skunk 4" width="70px">
+					<button id="play_finish" class="off"
+						onclick="">
+						<img src="images/dot.png" alt="Play - Finish">
 					</button>
 				</div>
 			</div>
 			
 			<div>
-				<button id="skunk5_score" class="off">
-					<img src="images/dot.png" alt="skunk 5">
-				</button>
+				<div id="skunk5_score_ride" class="box on">
+					<div class="score_ride"></div>
+					<div class="score_ride"></div>
+					<div class="score_ride"></div>
+					<div class="score_ride"></div>
+					<div class="score_ride"></div>
+				</div>
+				<div id="skunk5_score_total" class="score_total on"></div>
 			</div>
 			<div>
-				<button id="skunk6_score" class="off">
-					<img src="images/dot.png" alt="skunk 6">
-				</button>
+				<div id="skunk6_score_ride" class="box on">
+					<div class="score_ride"></div>
+					<div class="score_ride"></div>
+					<div class="score_ride"></div>
+					<div class="score_ride"></div>
+					<div class="score_ride"></div>
+				</div>
+				<div id="skunk6_score_total" class="score_total on"></div>
 			</div>
 			<div>
-				<button id="skunk7_core" class="off">
-					<img src="images/dot.png" alt="skunk 7">
-				</button>
+				<div id="skunk7_score_ride" class="box on">
+					<div class="score_ride"></div>
+					<div class="score_ride"></div>
+					<div class="score_ride"></div>
+					<div class="score_ride"></div>
+					<div class="score_ride"></div>
+				</div>
+				<div id="skunk7_score_total" class="score_total on"></div>
 			</div>
 		</div>
 		
@@ -282,20 +304,20 @@
 			}
 		}, false);
 	}
-	function skunkMove(skunkId, action) {
+	function skunkMove(skunkId, skunkAction) {
 		// if different no move allowed
 		console.log("compara skunkId=" + skunkId + " com o do cookie="
 				+ getCookie("skunkId"));
-		if ((skunkId == getCookie("skunkId") || ((getCookie("skunkId") == clientInitialSkunkId) && (action == "choose")))) {
+		if ((skunkId == getCookie("skunkId") || ((getCookie("skunkId") == clientInitialSkunkId) && (skunkAction == "choose")))) {
 			console.log("vai sse..parms:skunkSseId=" + getCookie("skunkSseId")
 					+ "&skunkGameId=" + getCookie("skunkGameId") + "&skunkId="
-					+ skunkId + "&action=" + action);
+					+ skunkId + "&skunkAction=" + skunkAction);
 			var request = new XMLHttpRequest();
 
 			request.open("GET", "/SkunkGame?skunkSseId="
 					+ getCookie("skunkSseId") + "&skunkGameId="
 					+ getCookie("skunkGameId") + "&skunkId=" + skunkId
-					+ "&action=" + action, true);
+					+ "&skunkAction=" + skunkAction, true);
 			request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 			request.send(null);
 			console.log("foi sse...???");
@@ -331,47 +353,6 @@
 					+ " =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
 		}
 	}
-	
-	
-	
-	var cube1 = document.querySelector('#cube1');
-	var cube2 = document.querySelector('#cube2');
-	var cube3 = document.querySelector('#cube3');
-
-	var currentClass = '';
-
-	var show = document.getElementById('show');
-
-	var min = 0;
-	var max = 6;
-	var face = "face1";
-	var currentFace = face;
-	var facew = "back";
-
-	var faces = ["front", "back", "right", "left", "top", "bottom"];
-
-	show.onclick = function() {
-			loopFace(cube1);
-		/*	myVar = setTimeout(loopFace, 500);
-			myVar = setTimeout(loopFace, 1000);*/
-			
-	}
-
-	function loopFace(cube) {
-		while (currentFace == face ) {
-	  		face = faces[getRandom(max, min)];
-	  		console.log(face);
-	  	}
-		cube.classList.remove(currentFace); 
-		currentFace = face;
-		cube.classList.add(face);
-		show.innerText = face;
-	}
-
-	function getRandom(max, min) {
-		  return (Math.floor((Math.random() * max) + min));
-	}
-	
 
 </script>
 

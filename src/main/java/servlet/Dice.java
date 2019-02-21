@@ -43,7 +43,7 @@ public class Dice {
 	public int getDiceValue() {
 		return this.value;
 	}
-	public String getDiceRotation(int value) {
+	public String getDiceRotation() {
 		System.out.println("getDiceRotaion value = " + value);
 		
 		String[] wR = rotations.getRotation(value,  pairRotation);

@@ -46,6 +46,37 @@ html, body {
 	opacity: 1;
 	cursor: pointer;
 }
+button {
+	width: 140px;
+	background-color: transparent;
+	border: none;
+}
+.score_ride {
+	width: 28px;
+	height: 28px;
+	background-color: gray;
+	border: 1px solid black;
+}
+.score_total {
+	width: 140px;
+	height: 40px;
+	background-color: gray;
+	border: 1px solid black;
+}
+#play_finish.finish img{
+	background: url('/images/finish.png') no-repeat;
+	width: 60px;
+	height: 60px;
+	margin: auto;
+	padding: 0px;
+}
+#play_finish.play img{
+	background: url('/images/play.png') no-repeat;
+	width: 60px;
+	height: 60px;
+	margin: auto;
+	padding: 0px;
+}
 #skunk1_play.up img{
 	display: block;
 	background: url('/images/skunk1_play_up.png') no-repeat;
@@ -83,8 +114,7 @@ html, body {
 	height: 156px;
 }
 #skunk4_play.on img{
-	display: block;
-	background: url('/images/boss_s.png') no-repeat;
+	background: url('/images/boss_m.png') no-repeat;
 	width: 140px;
 	height: 156px;
 }
