@@ -102,6 +102,8 @@ public class SkunkGame extends HttpServlet {
 		skunkScore.put("skunk7", new Score());
 
 		skunksChosen.clear();
+		winners.clear();
+		winnerScore = 0;
 		bufferMsg.clear();
 		message = "";
 
@@ -240,7 +242,9 @@ public class SkunkGame extends HttpServlet {
 					skunksToChoose.remove(clientSkunkId);
 					
 					if (!clientSkunkId.equals(skunkBoss)) {
+						System.out.println("CHOSENNNNNNNNNN######= " + clientSkunkId);
 						skunksChosen.add(clientSkunkId);
+						skunksUp.add(clientSkunkId);
 					}
 
 				} else if ((clientSkunkAction.equals("play")) && (clientSkunkId.equals(skunkBoss))) {
@@ -257,7 +261,6 @@ public class SkunkGame extends HttpServlet {
 					
 					message = message + players.get(intClientSkunkSseId).makeMove(clientSkunkId, clientSkunkAction);
 
-					skunksUp = skunksChosen;
 					skunksDown.clear();
 				}
 				////////////// gameStatus = PLAYING /////////////////
@@ -378,6 +381,7 @@ public class SkunkGame extends HttpServlet {
 			}
 			
 			System.out.println(" #######..scoreRide=" + scoreRide);
+			System.out.println(" #######..skunkRide=" + skunkRide);
 			
 			for (String skunkUp : skunksUp) {
 				if (scoreRide == -1) {
@@ -398,16 +402,32 @@ public class SkunkGame extends HttpServlet {
 										skunkScore.get(skunkUp).getTotalScore(), skunkRide);	
 				}
 			}
-			message = message + players.get(intClientSkunkSseId).skunkTitleMove(skunkRide); 
-			skunkRide = skunkRide + 1;
+			if (scoreRide < 1) {
+				// ride is over, change correspondent S K U N K letter
+				message = message + players.get(intClientSkunkSseId).skunkTitleMove(skunkRide); 
+				skunkRide = skunkRide + 1;
+			}
 			if (skunkRide > 5) {
-				goSkunk(intClientSkunkSseId);
+				skunkRide = 5;
+				goSkunk(intClientSkunkSseId, clientSkunkId, clientSkunkAction);
 			}
 		}
 	}
 	
-	public void goSkunk(int intClientSkunkSseId) {
+	public void goSkunk(int intClientSkunkSseId, String clientSkunkId, String clientSkunkAction) {
 		System.out.println(" ####### S K U N K #######" + scoreRide);
+		
+		// forces dice face 0, what will show 1 (boss)
+		for (int i = 0; i < 3; i++) {	
+			System.out.println(" ####### loop forcing dice 0 #######" + i);
+			dice[i].setDiceValue(dice[i].rollDice(0));
+			message = message + players.get(intClientSkunkSseId).diceMove(clientSkunkId, clientSkunkAction, dice[i]);
+		}
+		message = message + players.get(intClientSkunkSseId).setDiceButtonsMove(0); 
+		
+		sendUpdateToAll(message);
+		message = "";
+		
 		findWinners(skunksChosen);
 		
 		for (String winner : winners) {
@@ -440,10 +460,6 @@ public class SkunkGame extends HttpServlet {
 				System.out.println("No more subscribers");
 			}
 		}
-	}
-
-	public int getRandom(int randSeed, int randRange) {
-		return r.nextInt(randRange) + randSeed;
 	}
 
 	private void sendUpdateToAll(String message) {

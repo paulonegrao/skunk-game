@@ -230,3 +230,33 @@ text-align: center;
 .cube3_face_top    { transform: rotateX(90deg) translateZ(60px); }
 .cube3_face_bottom { transform: rotateX(-90deg) translateZ(60px); }
 
+.cube1_face.cube1_face_back.default img{
+	width: 120px;
+	height: 120px;
+	background: url("/images/js.png") no-repeat;
+}
+.cube1_face.cube1_face_back.skunk img{
+	width: 120px;
+	height: 120px;
+	background: url("/images/js4.png") no-repeat;
+}
+.cube2_face_back.default img{
+	width: 120px;
+	height: 120px;
+	background: url("/images/js.png") no-repeat;
+}
+.cube2_face_back.skunk img{
+	width: 120px;
+	height: 120px;
+	background: url("/images/js2.png") no-repeat;
+}
+.cube3_face_back.default img{
+	width: 120px;
+	height: 120px;
+	background: url("/images/js.png") no-repeat;
+}
+.cube3_face_back.skunk img{
+	width: 120px;
+	height: 120px;
+	background: url("/images/js3.png") no-repeat;
+}

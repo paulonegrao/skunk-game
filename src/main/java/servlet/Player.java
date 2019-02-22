@@ -196,37 +196,64 @@ public class Player {
 		return message;
 	}
 	
-	public String setDiceButtonsMove(int selectedNunDice) {
+	public String setDiceButtonsMove(int selectedNumDice) {
 		System.out.println("no setDiceButtonsMove do player");
 		
 		String message = "";
-		
-		// set dice images 
-		if (selectedNunDice == 1) {
-			message = message + dataHeader + "cube1.style.display = 'block';" 									+ dataBreak;
-			message = message + dataHeader + "cube2.style.display = 'none';" 									+ dataBreak;
-			message = message + dataHeader + "cube3.style.display = 'none';" 									+ dataBreak;
-		} else if (selectedNunDice == 2) {
-			message = message + dataHeader + "cube1.style.display = 'block';" 									+ dataBreak;
-			message = message + dataHeader + "cube2.style.display = 'block';" 									+ dataBreak;
-			message = message + dataHeader + "cube3.style.display = 'none';" 									+ dataBreak;
-		} else {
-			message = message + dataHeader + "cube1.style.display = 'block';" 									+ dataBreak;
-			message = message + dataHeader + "cube2.style.display = 'block';" 									+ dataBreak;
-			message = message + dataHeader + "cube3.style.display = 'block';" 									+ dataBreak;
-		}
-		
-		// set dice buttons 
-		for (int i = 1; i < 4; i++) {
-			if (i == selectedNunDice ) {		
-				message = message + dataHeader + "dice" + i + ".classList.remove('off', 'not_selected');" 		+ dataBreak;
-				message = message + dataHeader + "dice" + i + ".classList.add('on', 'selected');"				+ dataBreak;
+		if (selectedNumDice > 0) {
+			// set dice images 
+			if (selectedNumDice == 1) {
+				message = message + dataHeader + "cube1.style.display = 'block';" 									+ dataBreak;
+				message = message + dataHeader + "cube2.style.display = 'none';" 									+ dataBreak;
+				message = message + dataHeader + "cube3.style.display = 'none';" 									+ dataBreak;
+			} else if (selectedNumDice == 2) {
+				message = message + dataHeader + "cube1.style.display = 'block';" 									+ dataBreak;
+				message = message + dataHeader + "cube2.style.display = 'block';" 									+ dataBreak;
+				message = message + dataHeader + "cube3.style.display = 'none';" 									+ dataBreak;
 			} else {
-				message = message + dataHeader + "dice" + i + ".classList.remove('off', 'selected');" 			+ dataBreak;
-				message = message + dataHeader + "dice" + i + ".classList.add('on', 'not_selected');"			+ dataBreak;
+				message = message + dataHeader + "cube1.style.display = 'block';" 									+ dataBreak;
+				message = message + dataHeader + "cube2.style.display = 'block';" 									+ dataBreak;
+				message = message + dataHeader + "cube3.style.display = 'block';" 									+ dataBreak;
 			}
+			
+			// set dice buttons 
+			for (int i = 1; i < 4; i++) {
+				if (i == selectedNumDice ) {		
+					message = message + dataHeader + "dice" + i + ".classList.remove('off', 'not_selected');" 		+ dataBreak;
+					message = message + dataHeader + "dice" + i + ".classList.add('on', 'selected');"				+ dataBreak;
+				} else {
+					message = message + dataHeader + "dice" + i + ".classList.remove('off', 'selected');" 			+ dataBreak;
+					message = message + dataHeader + "dice" + i + ".classList.add('on', 'not_selected');"			+ dataBreak;
+				}
+			}
+		} else {
+			// Rides Over reseting dice
+			message = message + dataHeader + "cube1.style.display = 'block';" 										+ dataBreak;
+			message = message + dataHeader + "cube2.style.display = 'block';" 										+ dataBreak;
+			message = message + dataHeader + "cube3.style.display = 'block';" 										+ dataBreak;
+			
+			message = message + dataHeader + "cube1_boss.classList.remove('default');"								+ dataBreak;
+			message = message + dataHeader + "cube1_boss.classList.add('skunk');"	 								+ dataBreak;
+			message = message + dataHeader + "cube2_boss.classList.remove('default');"								+ dataBreak;
+			message = message + dataHeader + "cube2_boss.classList.add('skunk');"									+ dataBreak;
+			message = message + dataHeader + "cube3_boss.classList.remove('default');"								+ dataBreak;
+			message = message + dataHeader + "cube3_boss.classList.add('skunk');"									+ dataBreak;
+			
+			message = message + dataHeader + "cube1.style.transform = 'translateZ(-100px)  " + 
+												SkunkGame.d1.getDiceRotation() + "';" 								+ dataBreak;
+			message = message + dataHeader + "cube2.style.transform = 'translateZ(-100px)  " + 
+												SkunkGame.d2.getDiceRotation() + "';" 								+ dataBreak;
+			message = message + dataHeader + "cube3.style.transform = 'translateZ(-100px)  " + 
+												SkunkGame.d3.getDiceRotation() + "';" 								+ dataBreak;
+			
+			message = message + dataHeader + "dice1.classList.remove('on');" 										+ dataBreak;
+			message = message + dataHeader + "dice1.classList.add('off');"											+ dataBreak;
+			message = message + dataHeader + "dice2.classList.remove('on');" 										+ dataBreak;
+			message = message + dataHeader + "dice2.classList.add('off');"											+ dataBreak;
+			message = message + dataHeader + "dice3.classList.remove('on');" 										+ dataBreak;
+			message = message + dataHeader + "dice3.classList.add('off');"											+ dataBreak;
 		}
-		
+
 		// add message to bufferMsg
 			SkunkGame.bufferMsg.add(message);
 			

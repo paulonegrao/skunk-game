@@ -32,10 +32,16 @@ public class Dice {
 		if (faces > 0) {
 			return r.nextInt(faces) + 1;
 		}
-		return 0;
+		// return 1 when finishing SKUNK rides
+		return 1;
 	}
 	
 	public void setDiceValue(int value) {
+		/*if (pairRotation == 0) {
+			pairRotation = 1;
+		}else {
+			pairRotation = 0;
+		}*/
 		if (value > 0) {
 			this.value = value;
 		}

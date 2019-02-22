@@ -23,7 +23,7 @@
 			<div class=box>
 				<div id="cube1" class="cube1">
 					<div class="cube1_face cube1_face_front"><img src="/images/seis.png"></div>
-					<div class="cube1_face cube1_face_back"><img src="/images/jason.png"></div>
+					<div id="cube1_boss" class="cube1_face cube1_face_back default"><img src="/images/dot.png"></div>
 					<div class="cube1_face cube1_face_right"><img src="/images/cinco.png"></div>
 					<div class="cube1_face cube1_face_left"><img src="/images/dois.png"></div>
 					<div class="cube1_face cube1_face_top"><img src="/images/treis.png"></div>
@@ -31,7 +31,7 @@
 				</div>
 				<div id="cube2" class="cube2">
 					<div class="cube2_face cube2_face_front"><img src="/images/seis.png"></div>
-					<div class="cube2_face cube2_face_back"><img src="/images/jason.png"></div>
+					<div id="cube2_boss" class="cube2_face cube2_face_back default"><img src="/images/dot.png"></div>
 					<div class="cube2_face cube2_face_right"><img src="/images/cinco.png"></div>
 					<div class="cube2_face cube2_face_left"><img src="/images/dois.png"></div>
 					<div class="cube2_face cube2_face_top"><img src="/images/treis.png"></div>
@@ -39,7 +39,7 @@
 				</div>
 				<div id="cube3" class="cube3">
 					<div class="cube3_face cube3_face_front"><img src="/images/seis.png"></div>
-					<div class="cube3_face cube3_face_back"><img src="/images/jason.png"></div>
+					<div id="cube3_boss" class="cube3_face cube3_face_back default"><img src="/images/dot.png"></div>
 					<div class="cube3_face cube3_face_right"><img src="/images/cinco.png"></div>
 					<div class="cube3_face cube3_face_left"><img src="/images/dois.png"></div>
 					<div class="cube3_face cube3_face_top"><img src="/images/treis.png"></div>
@@ -278,8 +278,8 @@
 
 	function sseSkunkGame() {
 		console.log("sseSkunkGame...");
-		source = new EventSource('https://skunkgame.herokuapp.com/SkunkGame?' + skunkCookie);
-		/*source = new EventSource('http://localhost:8080/SkunkGame?' + skunkCookie);*/
+		/*source = new EventSource('https://skunkgame.herokuapp.com/SkunkGame?' + skunkCookie);*/
+		source = new EventSource('http://localhost:8080/SkunkGame?' + skunkCookie);
 		/*source.onopen 	= function() {};
 		eventSource.onmessage 	= function(message) {console.log(message.data)};
 		eventSource.onerror	 	= function(merr) {console.log("error..." + merr)};*/
