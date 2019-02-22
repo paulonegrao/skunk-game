@@ -60,6 +60,9 @@ public class SkunkGame extends HttpServlet {
 	static String gameStatus;
 	static String skunkBoss = "skunk4";
 	static String clientInitialSkunkId = "skunk0";
+	
+	private int winnerScore;
+	private Set<String> winners = new HashSet<String>();
 
 	private HashMap<String, Score> skunkScore = new HashMap<String, Score>();
 
@@ -380,7 +383,6 @@ public class SkunkGame extends HttpServlet {
 				if (scoreRide == -1) {
 					skunkScore.get(skunkUp).zeroScore();
 					message = message + players.get(intClientSkunkSseId).zeroScoreMove(skunkUp); 
-					skunkRide = skunkRide + 1;
 				}else if (scoreRide == 0) {
 					int wScoreRide = skunkScore.get(skunkUp).getRideScore(skunkRide);
 					if (wScoreRide > 0) {
@@ -389,23 +391,46 @@ public class SkunkGame extends HttpServlet {
 					message = message + players.get(intClientSkunkSseId).scoreMove(skunkUp, 
 							skunkScore.get(skunkUp).getRideScore(skunkRide), 
 							skunkScore.get(skunkUp).getTotalScore(), skunkRide);
-					skunkRide = skunkRide + 1;
 				} else {
 					skunkScore.get(skunkUp).addScore(skunkRide, scoreRide);
 					message = message + players.get(intClientSkunkSseId).scoreMove(skunkUp, 
 										skunkScore.get(skunkUp).getRideScore(skunkRide), 
 										skunkScore.get(skunkUp).getTotalScore(), skunkRide);	
 				}
-				if (skunkRide > 5) {
-					goSkunk();
-					break;
-				}
+			}
+			message = message + players.get(intClientSkunkSseId).skunkTitleMove(skunkRide); 
+			skunkRide = skunkRide + 1;
+			if (skunkRide > 5) {
+				goSkunk(intClientSkunkSseId);
 			}
 		}
 	}
 	
-	public void goSkunk() {
+	public void goSkunk(int intClientSkunkSseId) {
 		System.out.println(" ####### S K U N K #######" + scoreRide);
+		findWinners(skunksChosen);
+		
+		for (String winner : winners) {
+			if (skunkScore.get(winner).getTotalScore() == this.winnerScore) {
+				message = message + players.get(intClientSkunkSseId).winnerScoreMove(winner); 
+			}
+		}
+	}
+	
+	public void findWinners(Set<String> skunksChosen) {
+
+		winnerScore = 0;
+		int playerScore = 0;
+		for (String skunkChosen : skunksChosen) {
+			playerScore = skunkScore.get(skunkChosen).getTotalScore();
+			if (playerScore >= winnerScore) {
+			   if (playerScore > winnerScore) {
+				   this.winnerScore = playerScore;
+				   this.winners.clear();
+			   }
+			   this.winners.add(skunkChosen);
+			}
+		}
 	}
 
 	private void removeListener(PrintWriter out) {

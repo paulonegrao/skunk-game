@@ -26,6 +26,7 @@ public class Score {
 		totalScore = totalScore + value;
 		
 	}
+
 	public void zeroScore() {
 		rideScore.put(1, 0);
 		rideScore.put(2, 0);

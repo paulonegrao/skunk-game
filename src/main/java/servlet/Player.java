@@ -153,6 +153,35 @@ public class Player {
 		return message;
 	}
 	
+	public String winnerScoreMove(String skunkId) {
+		System.out.println("no winnerScoreMove do player");
+		
+		String message = "";
+		
+		// set winner score to skunk
+		message = message + dataHeader + skunkId + "_score.classList.add('blink');"  					+ dataBreak;
+		
+		// add message to bufferMsg
+		SkunkGame.bufferMsg.add(message);
+		
+		return message;
+	}
+	
+	public String skunkTitleMove(int skunkRide) {
+		System.out.println("no winnerScoreMove do player");
+		
+		String message = "";
+		
+		// set color to skunk letter in the title
+		int children = skunkRide - 1;
+		message = message + dataHeader + "skunk_title.children[" + children + "].classList.add('ride_done');"  + dataBreak;
+		
+		// add message to bufferMsg
+		SkunkGame.bufferMsg.add(message);
+		
+		return message;
+	}
+	
 	public String finishMove(String skunkId, String action) {
 		System.out.println("no finishMove do player");
 		String message = "";
@@ -203,4 +232,5 @@ public class Player {
 			
 			return message;
 		}
+	
 }

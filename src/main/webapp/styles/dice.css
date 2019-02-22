@@ -19,7 +19,7 @@ justify-content: center;
 
 width: 550px;
 height: 200px;
-border: 1px solid #CCC;
+border: none;
 margin: 0 auto;
 perspective: 400px;
 
@@ -79,10 +79,10 @@ transform: translateZ(-100px) rotateX(90deg);
 
 .cube1_face {
 position: absolute;
-background-color: rgba(255, 255, 255, 0.9);
+background-color: rgba(0, 0, 0, 0.9);
 width: 120px;
 height: 120px;
-border:0px solid #ccc;
+border:0px solid #000;
 text-align: center;
 }
   
@@ -148,7 +148,7 @@ transform: translateZ(-100px) rotateX(90deg);
 
 .cube2_face {
 position: absolute;
-background-color: rgba(255, 255, 255, 0.9);
+background-color: rgba(0, 0, 0, 0.9);
 width: 120px;
 height: 120px;
 border:0px solid #ccc;
@@ -216,7 +216,7 @@ transform: translateZ(-100px) rotateX(90deg);
 
 .cube3_face {
 position: absolute;
-background-color: rgba(255, 255, 255, 0.9);
+background-color: rgba(0, 0, 0, 0.9);
 width: 120px;
 height: 120px;
 border:0px solid #ccc;

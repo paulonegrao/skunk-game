@@ -6,15 +6,14 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" media="all" href="/styles/sk.css" />
 <link rel="stylesheet" media="all" href="/styles/dice.css" />
+<link rel="stylesheet" media="all" href="/styles/smoke.css" />
 <link rel="shortcut icon" href="/images/favicon.ico">
 <title>SKUNK Game</title>
 
 
 </head>
 <body onload="sseSkunkGame()">
-	ola.....
-	<%=request.getAttribute("result")%>
-	####
+
 	<div id="container">
 
 	<div>Choose your SkinK</div>
@@ -95,15 +94,26 @@
 				</button>
 			</div>
 		</div>
-		
+	<!--  	
 		<div class="box">
 			<div class="normal">S</div>
 			<div id="sk_letter_2" class="normal">K</div>
 			<div id="sk_letter_3" class="normal">U</div>
 			<div id="sk_letter_4" class="normal">N</div>
 			<div class="normal">K</div>
+		</div> -->
+		<div>
+		<section>
+		<video src=“/images/smoke.mp4” autoplay muted></video>
+			<h1 id="skunk_title">
+				<span>S</span>
+				<span>K</span>
+				<span>U</span>
+				<span>N</span>
+				<span>K</span>
+			</h1>
+		</section>
 		</div>
-		
 		<div class="box">
 			<div>
 				<button id="skunk1_play" class="off"
@@ -149,7 +159,7 @@
 		</div>
 		
 		<div class="box">
-			<div>
+			<div id="skunk1_score">
 				<div id="skunk1_score_ride" class="box on">
 					<div class="score_ride"></div>
 					<div class="score_ride"></div>
@@ -159,7 +169,7 @@
 				</div>
 				<div id="skunk1_score_total" class="score_total on"></div>
 			</div>
-			<div>
+			<div id="skunk2_score">
 				<div id="skunk2_score_ride" class="box on">
 					<div class="score_ride"></div>
 					<div class="score_ride"></div>
@@ -169,7 +179,7 @@
 				</div>
 				<div id="skunk2_score_total" class="score_total on"></div>
 			</div>
-			<div>
+			<div id="skunk3_score">
 				<div id="skunk3_score_ride" class="box on">
 					<div class="score_ride"></div>
 					<div class="score_ride"></div>
@@ -189,7 +199,7 @@
 				</div>
 			</div>
 			
-			<div>
+			<div id="skunk5_score">
 				<div id="skunk5_score_ride" class="box on">
 					<div class="score_ride"></div>
 					<div class="score_ride"></div>
@@ -199,7 +209,7 @@
 				</div>
 				<div id="skunk5_score_total" class="score_total on"></div>
 			</div>
-			<div>
+			<div id="skunk6_score">
 				<div id="skunk6_score_ride" class="box on">
 					<div class="score_ride"></div>
 					<div class="score_ride"></div>
@@ -209,7 +219,7 @@
 				</div>
 				<div id="skunk6_score_total" class="score_total on"></div>
 			</div>
-			<div>
+			<div id="skunk7_score">
 				<div id="skunk7_score_ride" class="box on">
 					<div class="score_ride"></div>
 					<div class="score_ride"></div>

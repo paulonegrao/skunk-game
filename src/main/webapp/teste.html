@@ -2,59 +2,65 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" media="all" href="/styles/sk.css" />
-<link rel="stylesheet" media="all" href="/styles/dice.css" />
+<link rel="stylesheet" media="all" href="/styles/smoke.css" />
 <link rel="shortcut icon" href="/images/favicon.ico">
 <title>SKUNK Game</title>
 </head>
 <body>
 <style>
-
-.zera.zero span{
-	display: none;
+body {
+	margin: 0;
+	padding: 0;
 }
-
-.zera.zero:after {
-	content: "0";
+section {
+	height: 100vh;
+	background: #000;
 }
-.herda {
-	class: inherit;
+video {
+	object-fit: cover;
 }
-.d1 {
-	width: 200px;
-		height: 200px;
-	border: 3px solid blue;
+h1 {
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 100%;
+	text-align: center;
+	color: #ddd;
+	font-size: 5em;
+	font-family: sans-serif;
+	letter-spacing: 0.2em;
 }
-.d2 {
-	width: 20px;
-	height: 20px;
-	class: inherit;
+h1 span {
+	opacity: 0;
+	display: inline-block;
+	animation: animate 1s linear forwards;
 }
-.blue {
-	width: 20px;
-	height: 20px;
-	background-color: blue;
+@keyframes animate {
+	0%
+	{
+		opacity: 0;
+		transform: rotateY(90deg);
+		filter: blur(10px);
+	}
+	100%
+	{
+		opacity: 1;
+		transform: rotateY(0deg);
+		filter: blur(10px);
+	}
 }
-.red {
-	width: 200px;
-		height: 200px;
-	background-color: red;
-}
-
 </style>
-<div class="">1111
-	<div class="">2222
-			<div class="zera">3333
-				<div class="herda zero"><span>top</span></div>
-				<div class="zera zero"><span>middle</span></div>
-				<div class="herda zero"><span>botton</span></div>
-			</div>
-	</div>
-</div>
-<div class="d1 red">
-	<div class="d2 ">
-	</div>
-</div>
-
+<section>
+		<video src=“/images/smoke.mp4” autoplay muted></video>
+		<h1>
+			<span>S</span>
+			<span>K</span>
+			<span>U</span>
+			<span>N</span>
+			<span>K</span>
+		</h1>
+</section>
 </body>
 </html>

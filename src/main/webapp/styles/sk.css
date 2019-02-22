@@ -32,6 +32,19 @@ html, body {
     font-size: 80px;
     flex: 25%;
 }
+.ride_done {
+	color: #f5b32b;
+}
+.blink div{
+	font-family: sans-sefif;
+	color: white;
+	animation: blink 1s linear infinite;
+}
+@keyframes blink{
+	0%{opacity: 0;}
+	50%{opacity: .5;}
+	100%{opacity: 1;}
+}
 .skl img {
 	width: 100%;
 }
@@ -40,7 +53,7 @@ html, body {
 	cursor: none;
 }
 .off img{
-	opacity: 0.2;
+	opacity: 0;
 }
 .on img{
 	opacity: 1;

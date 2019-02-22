@@ -1,0 +1,44 @@
+body {
+	margin: 0;
+	padding: 0;
+	background: #000;
+}
+section {
+	height: vh;
+	background: #000;
+}
+videos {
+	object-fit: cover;
+}
+h1 {
+	margin: 0 0 0 25px;
+	padding: 0;
+	position: absolute;
+	top: 225%;
+	transform: translateY(-50%);
+	width: 100%;
+	text-align: center;
+	color: #ddd;
+	font-size: 5em;
+	font-family: sans-serif;
+	letter-spacing: 0.6em;
+}
+h1 span {
+	opacity: 1;
+	display: inline-block;
+	animation: animatex 1s linear forwards;
+}
+@keyframes animate {
+	0%
+	{
+		opacity: 0;
+		transform: rotateY(90deg);
+		filter: blur(10px);
+	}
+	100%
+	{
+		opacity: 1;
+		transform: rotateY(0deg);
+		filter: blur(10px);
+	}
+}
