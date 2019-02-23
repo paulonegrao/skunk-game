@@ -158,7 +158,7 @@ public class SkunkGame extends HttpServlet {
 				response.setHeader("Connection", "keep-alive");
 				response.setCharacterEncoding("UTF-8");
 				// CORS stuff
-				response.setHeader("Access-Control-Allow-Origin", "https://skunkgame.herokuapp.com/SkunkGame?");
+				response.setHeader("Access-Control-Allow-Origin", "https://skunkgame.herokuapp.com/SkunkGame");
 				response.setHeader("Access-Control-Expose-Headers", "*");
 				response.setHeader("Access-Control-Allow-Credentials", "true");
 				
