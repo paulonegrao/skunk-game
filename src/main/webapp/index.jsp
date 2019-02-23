@@ -54,19 +54,19 @@
 			<div>
 				<button id="skunk1_choose" class="on"
 					onclick="skunkMove('skunk1', 'choose')">
-					<img id="img_choose" src="images/sk_red_s.png" alt="Skunk 1">
+					<img id="img_choose" src="images/skunk1_choose.png" alt="Skunk 1">
 				</button>
 			</div>
 			<div>
 				<button id="skunk2_choose" class="on"
 					onclick="skunkMove('skunk2', 'choose')">
-					<img lass="img_choose" src="images/sk_red_s.png" alt="Skunk 1">
+					<img lass="img_choose" src="images/skunk2_choose.png" alt="Skunk 1">
 				</button>
 			</div>
 			<div>
 				<button id="skunk3_choose" class="on"
 					onclick="skunkMove('skunk3', 'choose')">
-					<img id="img_choose" src="images/sk_red_s.png" alt="Skunk 1">
+					<img id="img_choose" src="images/skunk3_choose.png" alt="Skunk 1">
 				</button>
 			</div>
 			<div>
@@ -78,19 +78,19 @@
 			<div>
 				<button id="skunk5_choose" class="on"
 					onclick="skunkMove('skunk5', 'choose')">
-					<img lass="img_choose" src="images/sk_red_s.png" alt="Skunk 1">
+					<img lass="img_choose" src="images/skunk5_choose.png" alt="Skunk 1">
 				</button>
 			</div>
 			<div>
 				<button id="skunk6_choose" class="on"
 					onclick="skunkMove('skunk6', 'choose')">
-					<img lass="img_choose" src="images/sk_red_s.png" alt="Skunk 1">
+					<img lass="img_choose" src="images/skunk6_choose.png" alt="Skunk 1">
 				</button>
 			</div>
 			<div>
 				<button id="skunk7_choose" class="on"
 					onclick="skunkMove('skunk7', 'choose')">
-					<img lass="img_choose" src="images/sk_red_s.png" alt="Skunk 7">
+					<img lass="img_choose" src="images/skunk7_choose.png" alt="Skunk 7">
 				</button>
 			</div>
 		</div>
@@ -235,19 +235,19 @@
 			<div>
 				<button id="dice1" class="off"
 					onclick="skunkMove('skunk4', 'roll1')">
-					<img src="images/1dado.png" alt="skunk 4" width="100px">
+					<img src="images/1dado.png" alt="skunk 4" width="180px">
 				</button>
 			</div>
 			<div>
 				<button id="dice2" class="off"
 					onclick="skunkMove('skunk4', 'roll2')">
-					<img src="images/2dados.png" alt="skunk 4" width="100px">
+					<img src="images/2dados.png" alt="skunk 4" width="180px">
 				</button>
 			</div>
 			<div>
 				<button id="dice3" class="off"
 					onclick="skunkMove('skunk4', 'roll3')">
-					<img src="images/3dados.png" alt="skunk 4" width="100px">
+					<img src="images/3dados.png" alt="skunk 4" width="180px">
 				</button>
 			</div>
 		</div>
@@ -279,7 +279,7 @@
 	function sseSkunkGame() {
 		console.log("sseSkunkGame...");
 		source = new EventSource('https://skunkgame.herokuapp.com/SkunkGame?' + skunkCookie);
-		/*source = new EventSource('http://localhost:8080/SkunkGame?' + skunkCookie);*/
+		 /*source = new EventSource('http://localhost:8080/SkunkGame?' + skunkCookie);*/
 		/*source.onopen 	= function() {};
 		eventSource.onmessage 	= function(message) {console.log(message.data)};
 		eventSource.onerror	 	= function(merr) {console.log("error..." + merr)};*/

@@ -102,6 +102,7 @@ public class SkunkGame extends HttpServlet {
 		skunkScore.put("skunk7", new Score());
 
 		skunksChosen.clear();
+		skunksUp.clear();
 		winners.clear();
 		winnerScore = 0;
 		bufferMsg.clear();

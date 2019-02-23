@@ -64,6 +64,24 @@ button {
 	background-color: transparent;
 	border: none;
 }
+#dice1 {
+	padding: 6px 0 0 0;
+	width: 180px;
+	background-color: transparent;
+	border: none;
+}
+#dice2 {
+	padding: 6px 0 0 0;
+	width: 180px;
+	background-color: transparent;
+	border: none;
+}
+#dice3 {
+	padding: 6px 0 0 0;
+	width: 180px;
+	background-color: transparent;
+	border: none;
+}
 .score_ride {
 	width: 28px;
 	height: 28px;
@@ -104,25 +122,25 @@ button {
 }
 #skunk2_play.up img{
 	display: block;
-	background: url('/images/skunk1_play_up.png') no-repeat;
+	background: url('/images/skunk2_play_up.png') no-repeat;
 	width: 140px;
 	height: 156px;
 }
 #skunk2_play.down img{
 	display: block;
-	background: url('/images/skunk1_play_down.png') no-repeat;
+	background: url('/images/skunk2_play_down.png') no-repeat;
 	width: 140px;
 	height: 156px;
 }
 #skunk3_play.up img{
 	display: block;
-	background: url('/images/skunk1_play_up.png') no-repeat;
+	background: url('/images/skunk3_play_up.png') no-repeat;
 	width: 140px;
 	height: 156px;
 }
 #skunk3_play.down img{
 	display: block;
-	background: url('/images/skunk1_play_down.png') no-repeat;
+	background: url('/images/skunk3_play_down.png') no-repeat;
 	width: 140px;
 	height: 156px;
 }
@@ -133,37 +151,37 @@ button {
 }
 #skunk5_play.up img{
 	display: block;
-	background: url('/images/skunk1_play_up.png') no-repeat;
+	background: url('/images/skunk5_play_up.png') no-repeat;
 	width: 140px;
 	height: 156px;
 }
 #skunk5_play.down img{
 	display: block;
-	background: url('/images/skunk1_play_down.png') no-repeat;
+	background: url('/images/skunk5_play_down.png') no-repeat;
 	width: 140px;
 	height: 156px;
 }
 #skunk6_play.up img{
 	display: block;
-	background: url('/images/skunk1_play_up.png') no-repeat;
+	background: url('/images/skunk6_play_up.png') no-repeat;
 	width: 140px;
 	height: 156px;
 }
 #skunk6_play.down img{
 	display: block;
-	background: url('/images/skunk1_play_down.png') no-repeat;
+	background: url('/images/skunk6_play_down.png') no-repeat;
 	width: 140px;
 	height: 156px;
 }
 #skunk7_play.up img{
 	display: block;
-	background: url('/images/skunk1_play_up.png') no-repeat;
+	background: url('/images/skunk7_play_up.png') no-repeat;
 	width: 140px;
 	height: 156px;
 }
 #skunk7_play.down img{
 	display: block;
-	background: url('/images/skunk1_play_down.png') no-repeat;
+	background: url('/images/skunk7_play_down.png') no-repeat;
 	width: 140px;
 	height: 156px;
 }
