@@ -279,7 +279,7 @@
 	function sseSkunkGame() {
 		console.log("sseSkunkGame...");
 		source = new EventSource('https://skunkgame.herokuapp.com/SkunkGame?' + skunkCookie);
-		 /*source = new EventSource('http://localhost:8080/SkunkGame?' + skunkCookie);*/
+		/*source = new EventSource('http://localhost:8080/SkunkGame?' + skunkCookie);*/
 		/*source.onopen 	= function() {};
 		eventSource.onmessage 	= function(message) {console.log(message.data)};
 		eventSource.onerror	 	= function(merr) {console.log("error..." + merr)};*/
