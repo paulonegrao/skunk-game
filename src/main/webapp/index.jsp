@@ -278,8 +278,11 @@
 
 	function sseSkunkGame() {
 		console.log("sseSkunkGame...");
-		source = new EventSource('https://skunkgame.herokuapp.com/SkunkGame?' + skunkCookie);
-		/*source = new EventSource('http://localhost:8080/SkunkGame?' + skunkCookie);*/
+		if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+			source = new EventSource('http://localhost:8080/SkunkGame?' + skunkCookie);
+		} else {
+			source = new EventSource('http://skunkgame.herokuapp.com/SkunkGame?' + skunkCookie);
+		}
 		/*source.onopen 	= function() {};
 		eventSource.onmessage 	= function(message) {console.log(message.data)};
 		eventSource.onerror	 	= function(merr) {console.log("error..." + merr)};*/
