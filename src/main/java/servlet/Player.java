@@ -7,7 +7,7 @@ public class Player {
 	private String dataHeader	= "data: ";
 	private String dataBreak	= "\n";
 	private String dataTrailer	= "\n\n";
-	
+
 	public Player(int skunkSseId) {
 		if (skunkSseId > 0 ){
 			this.skunkSseId = skunkSseId;
@@ -15,20 +15,20 @@ public class Player {
 			System.out.println("criou Player=" + this.skunkSseId + "skunkId=" + this.skunkId);
 		}
 	}
-	
+
 	public Player(String skunkId) {
 		if ((skunkId != null) && (SkunkGame.validskunks.contains(skunkId))){
 			this.skunkId = skunkId;
 		}
 	}
-	
+
 	public String makeMove(String skunkId, String action) {
 		System.out.println("no makeMove do player");
-		
+
 		String message = "";
-		
+
 		if ((SkunkGame.gameStatus.equals("settingUp") && (action.equals("choose")))) {
-			// remove skunk from choose 
+			// remove skunk from choose
 			message = message + dataHeader + skunkId + "_choose.classList.remove('on');" 				+ dataBreak;
 			message = message + dataHeader + skunkId + "_choose.classList.add('off');" 					+ dataBreak;
 			message = message + dataHeader + skunkId + "_choose.disabled = true;" 						+ dataBreak;
@@ -36,12 +36,12 @@ public class Player {
 			message = message + dataHeader + skunkId + "_play.classList.remove('off');" 				+ dataBreak;
 			message = message + dataHeader + skunkId + "_play.classList.add('on', 'up');" 				+ dataBreak;
 			message = message + dataHeader + skunkId + "_play.disabled = false;" 						+ dataBreak;
-			
+
 			if (skunkId.equals(SkunkGame.skunkBoss)) {
 				// add play button to boss
 				message = message + dataHeader + "play_finish.classList.remove('off');" 				+ dataBreak;
 				message = message + dataHeader + "play_finish.classList.add('on', 'play');" 			+ dataBreak;
-				message = message + dataHeader + 
+				message = message + dataHeader +
 						"play_finish.setAttribute('onclick', 'skunkMove(\"skunk4\", \"play\")');" 		+ dataBreak;
 				message = message + dataHeader + "play_finish.disabled = false;"  						+ dataBreak;
 			}else {
@@ -62,146 +62,146 @@ public class Player {
 			// add finish button to boss
 			message = message + dataHeader + "play_finish.classList.remove('play');" 					+ dataBreak;
 			message = message + dataHeader + "play_finish.classList.add('finish');" 					+ dataBreak;
-			message = message + dataHeader + 
+			message = message + dataHeader +
 					"play_finish.setAttribute(\"onclick\", \"skunkMove('skunk4', 'finish')\");" 		+ dataBreak;
-			
+
 			// add dice to boss
 			message = message + dataHeader + "overlay.style.display = 'block';" 						+ dataBreak;
-			
+
 			// add dice buttons with 2 dice option selected (default)
 			setDiceButtonsMove(2);
-			
+
 		// move skunks UP & DOWN
 		}else if ((SkunkGame.gameStatus.equals("playing")) && (action.equals("down"))) {
 			message = message + dataHeader + skunkId + "_play.classList.remove('up');" 					+ dataBreak;
 			message = message + dataHeader + skunkId + "_play.classList.add('down');" 					+ dataBreak;
 			message = message + dataHeader + skunkId + "_play.disabled = false;" 						+ dataBreak;
-			message = message + dataHeader + skunkId + 
+			message = message + dataHeader + skunkId +
 					"_play.setAttribute(\"onclick\", \"skunkMove('" + skunkId + "', 'up')\");" 			+ dataTrailer;
-			
+
 		}else if ((SkunkGame.gameStatus.equals("playing")) && (action.equals("up"))) {
 			message = message + dataHeader + skunkId + "_play.classList.remove('down');" 				+ dataBreak;
 			message = message + dataHeader + skunkId + "_play.classList.add('up');" 					+ dataBreak;
 			message = message + dataHeader + skunkId + "_play.disabled = false;" 						+ dataBreak;
-			message = message + dataHeader + skunkId + 
+			message = message + dataHeader + skunkId +
 					"_play.setAttribute(\"onclick\", \"skunkMove('" + skunkId + "', 'down')\");" 		+ dataTrailer;
-			
+
 		}
-		
+
 		// add message to bufferMsg
 		SkunkGame.bufferMsg.add(message);
-		
+
 		return message;
 	}
-		
-		
+
+
 	public String diceMove(String skunkId, String action, Dice dice) {
 			System.out.println("no diceMove do player c/ dice=" + dice);
-		
+
 		String message = "";
-		
+
 		// roll 1, 2 or 3 dice
 		if ((SkunkGame.gameStatus.equals("playing")) && (action.substring(0, 4).equals("roll"))) {
-	
+
 			message = message + dataHeader + "cube" + dice.diceId + ".style.transform = 'translateZ(-100px) "
 										   + dice.getDiceRotation() + "';" 										+ dataBreak;
-			
+
 		}
-		
+
 		// add message to bufferMsg
 		SkunkGame.bufferMsg.add(message);
-		
+
 		return message;
-	}	
-	
-	
+	}
+
+
 	public String scoreMove(String skunkId, int rideScore, int totalScore, int skunkRide) {
 			System.out.println("no diceMove do player");
-			
+
 		String message = "";
-		
+
 		// add values to skunk score
 		int children = skunkRide - 1;
 
-		message = message + dataHeader + skunkId + 
+		message = message + dataHeader + skunkId +
 					"_score_ride.children[" + children + "].innerHTML = '" + rideScore + "';" 	 		+ dataBreak;
-		message = message + dataHeader + skunkId + 
+		message = message + dataHeader + skunkId +
 				    "_score_total.innerHTML = '" + totalScore + "';" 									+ dataBreak;
-			
-		
+
+
 		// add message to bufferMsg
 		SkunkGame.bufferMsg.add(message);
-		
+
 		return message;
 	}
-	
+
 	public String zeroScoreMove(String skunkId) {
 		System.out.println("no zeroScoreMove do player");
-		
+
 		String message = "";
-		
+
 		// add zeroed score to skunk
-		for (int i = 0; i <= 4; i++) {	
-			message = message + dataHeader + skunkId + 
+		for (int i = 0; i <= 4; i++) {
+			message = message + dataHeader + skunkId +
 					"_score_ride.children[" + i + "].innerHTML = '0';" 						    		+ dataBreak;
 		}
 		message = message + dataHeader + skunkId + "_score_total.innerHTML = '0';" 						+ dataBreak;
-		
+
 		// add message to bufferMsg
 		SkunkGame.bufferMsg.add(message);
-		
+
 		return message;
 	}
-	
+
 	public String winnerScoreMove(String skunkId) {
 		System.out.println("no winnerScoreMove do player");
-		
+
 		String message = "";
-		
+
 		// set winner score to skunk
 		message = message + dataHeader + skunkId + "_score.classList.add('blink');"  					+ dataBreak;
-		
+
 		// add message to bufferMsg
 		SkunkGame.bufferMsg.add(message);
-		
+
 		return message;
 	}
-	
-	public String skunkTitleMove(int skunkRide) {
+
+	public String smokeLetterMove(int skunkRide) {
 		System.out.println("no winnerScoreMove do player");
-		
+
 		String message = "";
-		
+
 		// set color to skunk letter in the title
 		int children = skunkRide - 1;
-		message = message + dataHeader + "skunk_title.children[" + children + "].classList.add('ride_done');"  + dataBreak;
-		
+		message = message + dataHeader + "smokeLetter('letter" + children + "');" + dataBreak;
+
 		// add message to bufferMsg
 		SkunkGame.bufferMsg.add(message);
-		
+
 		return message;
 	}
-	
+
 	public String finishMove(String skunkId, String action) {
 		System.out.println("no finishMove do player");
 		String message = "";
-		
+
 		// boss finishing the game
 		if ((skunkId.equals("skunk4")) && (action.equals("finish"))) {
 			message = message + dataHeader + "removeCookies(); location.reload();" 						+ dataBreak;
 		}
 		// add message to bufferMsg
 		SkunkGame.bufferMsg.add(message);
-		
+
 		return message;
 	}
-	
+
 	public String setDiceButtonsMove(int selectedNumDice) {
 		System.out.println("no setDiceButtonsMove do player");
-		
+
 		String message = "";
 		if (selectedNumDice > 0) {
-			// set dice images 
+			// set dice images
 			if (selectedNumDice == 1) {
 				message = message + dataHeader + "cube1.style.display = 'block';" 									+ dataBreak;
 				message = message + dataHeader + "cube2.style.display = 'none';" 									+ dataBreak;
@@ -215,10 +215,10 @@ public class Player {
 				message = message + dataHeader + "cube2.style.display = 'block';" 									+ dataBreak;
 				message = message + dataHeader + "cube3.style.display = 'block';" 									+ dataBreak;
 			}
-			
-			// set dice buttons 
+
+			// set dice buttons
 			for (int i = 1; i < 4; i++) {
-				if (i == selectedNumDice ) {		
+				if (i == selectedNumDice ) {
 					message = message + dataHeader + "dice" + i + ".classList.remove('off', 'not_selected');" 		+ dataBreak;
 					message = message + dataHeader + "dice" + i + ".classList.add('on', 'selected');"				+ dataBreak;
 				} else {
@@ -231,21 +231,21 @@ public class Player {
 			message = message + dataHeader + "cube1.style.display = 'block';" 										+ dataBreak;
 			message = message + dataHeader + "cube2.style.display = 'block';" 										+ dataBreak;
 			message = message + dataHeader + "cube3.style.display = 'block';" 										+ dataBreak;
-			
+
 			message = message + dataHeader + "cube1_boss.classList.remove('default');"								+ dataBreak;
 			message = message + dataHeader + "cube1_boss.classList.add('skunk');"	 								+ dataBreak;
 			message = message + dataHeader + "cube2_boss.classList.remove('default');"								+ dataBreak;
 			message = message + dataHeader + "cube2_boss.classList.add('skunk');"									+ dataBreak;
 			message = message + dataHeader + "cube3_boss.classList.remove('default');"								+ dataBreak;
 			message = message + dataHeader + "cube3_boss.classList.add('skunk');"									+ dataBreak;
-			
-			message = message + dataHeader + "cube1.style.transform = 'translateZ(-100px)  " + 
+
+			message = message + dataHeader + "cube1.style.transform = 'translateZ(-100px)  " +
 												SkunkGame.d1.getDiceRotation() + "';" 								+ dataBreak;
-			message = message + dataHeader + "cube2.style.transform = 'translateZ(-100px)  " + 
+			message = message + dataHeader + "cube2.style.transform = 'translateZ(-100px)  " +
 												SkunkGame.d2.getDiceRotation() + "';" 								+ dataBreak;
-			message = message + dataHeader + "cube3.style.transform = 'translateZ(-100px)  " + 
+			message = message + dataHeader + "cube3.style.transform = 'translateZ(-100px)  " +
 												SkunkGame.d3.getDiceRotation() + "';" 								+ dataBreak;
-			
+
 			message = message + dataHeader + "dice1.classList.remove('on');" 										+ dataBreak;
 			message = message + dataHeader + "dice1.classList.add('off');"											+ dataBreak;
 			message = message + dataHeader + "dice2.classList.remove('on');" 										+ dataBreak;
@@ -256,8 +256,8 @@ public class Player {
 
 		// add message to bufferMsg
 			SkunkGame.bufferMsg.add(message);
-			
+
 			return message;
 		}
-	
+
 }

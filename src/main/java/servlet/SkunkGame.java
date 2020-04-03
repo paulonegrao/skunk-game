@@ -60,7 +60,7 @@ public class SkunkGame extends HttpServlet {
 	static String gameStatus;
 	static String skunkBoss = "skunk4";
 	static String clientInitialSkunkId = "skunk0";
-	
+
 	private int winnerScore;
 	private Set<String> winners = new HashSet<String>();
 
@@ -75,12 +75,12 @@ public class SkunkGame extends HttpServlet {
 	 */
 	public SkunkGame() {
 		super();
-		
+
 		setUp();
 	}
-	
+
 	public void setUp() {
-		
+
 		setGameId();
 
 		gameStatus = "settingUp";
@@ -125,7 +125,7 @@ public class SkunkGame extends HttpServlet {
 
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		System.out.println("entrando sse......");
+		System.out.println("entrando sse......vindo de=" + request.getServerName());
 
 		String clientSkunkSseId = request.getParameter("skunkSseId");
 		String clientSkunkId = request.getParameter("skunkId");
@@ -145,23 +145,31 @@ public class SkunkGame extends HttpServlet {
 
 			// Is this a message subscription request?
 
-			if (((clientSkunkSseId != null && clientSkunkSseId.length() 	> 0))  && 
+			if (((clientSkunkSseId != null && clientSkunkSseId.length() 	> 0))  &&
 			   ((clientSkunkGameId != null && clientSkunkGameId.length() 	> 0))  &&
 			   ((clientSkunkId 	   != null && clientSkunkId.length() 		> 0))) {
-				
+
 				int intClientSkunkSseId = Integer.parseInt(clientSkunkSseId);
 				System.out.println("passo1....cookies Sse=" + clientSkunkSseId + " Game=" + clientSkunkGameId + " Skunk="
 						+ clientSkunkId + " action=" + clientSkunkAction);
-				
+
 
 				response.setContentType("text/event-stream");
 				response.setHeader("Connection", "keep-alive");
 				response.setCharacterEncoding("UTF-8");
 				// CORS stuff
-				response.setHeader("Access-Control-Allow-Origin", "http://skunkgame.herokuapp.com");
-				response.setHeader("Access-Control-Expose-Headers", "*");
-				response.setHeader("Access-Control-Allow-Credentials", "true");
-				
+				String serverName = request.getServerName();
+				if ((serverName != null) && (serverName.equals("localhost"))) {
+					//response.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
+					System.out.println("SSE......vindo de=" + serverName);
+				}
+				else {
+					response.setHeader("Access-Control-Allow-Origin", "http://skunkgame.herokuapp.com");
+					response.setHeader("Access-Control-Expose-Headers", "*");
+					response.setHeader("Access-Control-Allow-Credentials", "true");
+					System.out.println("SSE......vindo de=" + serverName);
+				}
+
 				// boss reinitializing the game
 				if 	((clientSkunkId.equals(skunkBoss)) 		&&
 					 (clientSkunkAction != null)			&&
@@ -171,37 +179,37 @@ public class SkunkGame extends HttpServlet {
 							listeners.clear();
 							setUp();
 				}else if ((clientSkunkId.equals(clientInitialSkunkId)) || (clientSkunkAction == null)) {
-						
-					System.out.println("passo2.... frist connection");
+
+					System.out.println("passo2.... first connection");
 					System.out.println("if ( clientSkunkId == skunk0 && clientSkunkAction == null" + clientSkunkId + "  "   + clientSkunkAction);
-					
+
 					PrintWriter out = response.getWriter();
 					// Store until a message needs to be sent
 					synchronized (listeners) {
 						listeners.add(out);
 						listenerIndex = listeners.size() - 1;
 					}
-					
+
 					skunkSseId++;
-					
+
 					players.put(skunkSseId, new Player(skunkSseId));
-					
+
 					out.write("event: skunkSseId\n");
 					out.write("data: " + skunkSseId + "\n\n");
-					
+
 					out.write("event: skunkGameId\n");
 					out.write("data: " + gameId + "\n\n");
-					
+
 					out.write("event: skunkId\n");
 					out.write("data: skunk0\n");
-					
+
 					out.write("retry: 300000\n\n");
-					
+
 					// send all updates to new user
 					if (bufferMsg.size() > 0) {
 						sendUpdateToOne(listenerIndex, bufferMsg);
 					}
-					
+
 					while (true) {
 						// System.out.println("SSE Sending heartbeat");
 						out.write(": \n\n");
@@ -221,11 +229,11 @@ public class SkunkGame extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void goGame(int intClientSkunkSseId, String clientSkunkSseId, String clientSkunkId, String clientSkunkGameId, String clientSkunkAction) {
-		
+
 		if (clientSkunkGameId.equals(gameId)) {
-			
+
 			System.out.println("ta no mesmo gameid=" + gameId);
 			System.out.println("....passo3....Setting up new event listener com clientSkunkId = " + clientSkunkId
 					+ " clientSkunkAction=" + clientSkunkAction);
@@ -234,14 +242,14 @@ public class SkunkGame extends HttpServlet {
 				if (clientSkunkAction.equals("choose")) {
 					// message = Player.makeMove(clientSkunkId, clientSkunkAction);
 					Player wPlayer = players.get(intClientSkunkSseId);
-					
+
 					System.out.println("....passo4....Setting up new event listener com clientSkunkId = " + clientSkunkId
 							+ " clientSkunkAction=" + clientSkunkAction);
-					
+
 					message = wPlayer.makeMove(clientSkunkId, clientSkunkAction);
 
 					skunksToChoose.remove(clientSkunkId);
-					
+
 					if (!clientSkunkId.equals(skunkBoss)) {
 						System.out.println("CHOSENNNNNNNNNN######= " + clientSkunkId);
 						skunksChosen.add(clientSkunkId);
@@ -253,13 +261,13 @@ public class SkunkGame extends HttpServlet {
 					skunkRide++;
 					scoreRide = 0;
 					selectedNumDice = 2;
-					
+
 					// add dice buttons with 2 dice option selected (default)
 					message = players.get(intClientSkunkSseId).setDiceButtonsMove(selectedNumDice);
 
 					System.out.println("....passo5....clientSkunkAction.equals(\"play\")) && (clientSkunkId.equals(skunkBoss) com clientSkunkId = " + clientSkunkId
 							+ " clientSkunkAction=" + clientSkunkAction);
-					
+
 					message = message + players.get(intClientSkunkSseId).makeMove(clientSkunkId, clientSkunkAction);
 
 					skunksDown.clear();
@@ -282,15 +290,15 @@ public class SkunkGame extends HttpServlet {
 						skunksDown.remove(clientSkunkId);
 						skunksUp.add(clientSkunkId);
 					}
-					
+
 					// dice button clicked
 				} else if ((clientSkunkAction.equals("roll1")) || (clientSkunkAction.equals("roll2"))
 						|| (clientSkunkAction.equals("roll3"))) {
-					
+
 					goRolling(intClientSkunkSseId, clientSkunkId, clientSkunkAction);
 				}
 			}
-			
+
 			System.out.println(".....MESSAGE=" + message);
 			sendUpdateToAll(message);
 			System.out.println("voltou do sendup...........");
@@ -301,15 +309,15 @@ public class SkunkGame extends HttpServlet {
 			System.out.println(
 					"client showing expired gameId. client=" + clientSkunkGameId + " gameId=" + gameId);
 		}
-		
+
 	}
-	
+
 	public void goRolling(int intClientSkunkSseId, String clientSkunkId, String clientSkunkAction) {
-		
-		System.out.println("....passo7....(clientSkunkAction.equals(\"roll1\")) || (clientSkunkAction.equals(\"roll2\"))\n" + 
+
+		System.out.println("....passo7....(clientSkunkAction.equals(\"roll1\")) || (clientSkunkAction.equals(\"roll2\"))\n" +
 				"									|| (clientSkunkAction.equals(\"roll3\")) com clientSkunkId = " + clientSkunkId
 				+ " clientSkunkAction=" + clientSkunkAction);
-		
+
 		Iterator<String> it1 = skunksChosen.iterator();
 		while(it1.hasNext()){
 			System.out.println(".......chosen===="+ it1.next());
@@ -323,15 +331,15 @@ public class SkunkGame extends HttpServlet {
 			System.out.println(".......UP=======" + it3.next());
 		}
 		System.out.println("... skunksUp.size=" + skunksUp.size());
-		
+
 		numDice = Integer.parseInt(clientSkunkAction.substring(4));
-		
+
 		// check & reset selected dice button
 		if (numDice != selectedNumDice) {
 			message = message + players.get(intClientSkunkSseId).setDiceButtonsMove(numDice);
 			selectedNumDice = numDice;
 		}
-		
+
 		System.out.println("numDice=" + numDice);
 		for (int i = 0; i < numDice; i++) {
 			// rolling the dice
@@ -340,7 +348,7 @@ public class SkunkGame extends HttpServlet {
 
 			message = message + players.get(intClientSkunkSseId).diceMove(clientSkunkId, clientSkunkAction, dice[i]);
 		}
-	
+
 		// Score only if there are skunks standing up....
 		if (skunksUp.size() > 0) {
 			if (numDice == 1) {
@@ -380,32 +388,32 @@ public class SkunkGame extends HttpServlet {
 			} else {
 				scoreRide = d1.value + d2.value + d3.value;
 			}
-			
+
 			System.out.println(" #######..scoreRide=" + scoreRide);
 			System.out.println(" #######..skunkRide=" + skunkRide);
-			
+
 			for (String skunkUp : skunksUp) {
 				if (scoreRide == -1) {
 					skunkScore.get(skunkUp).zeroScore();
-					message = message + players.get(intClientSkunkSseId).zeroScoreMove(skunkUp); 
+					message = message + players.get(intClientSkunkSseId).zeroScoreMove(skunkUp);
 				}else if (scoreRide == 0) {
 					int wScoreRide = skunkScore.get(skunkUp).getRideScore(skunkRide);
 					if (wScoreRide > 0) {
 						skunkScore.get(skunkUp).addScore(skunkRide, - wScoreRide);
 					}
-					message = message + players.get(intClientSkunkSseId).scoreMove(skunkUp, 
-							skunkScore.get(skunkUp).getRideScore(skunkRide), 
+					message = message + players.get(intClientSkunkSseId).scoreMove(skunkUp,
+							skunkScore.get(skunkUp).getRideScore(skunkRide),
 							skunkScore.get(skunkUp).getTotalScore(), skunkRide);
 				} else {
 					skunkScore.get(skunkUp).addScore(skunkRide, scoreRide);
-					message = message + players.get(intClientSkunkSseId).scoreMove(skunkUp, 
-										skunkScore.get(skunkUp).getRideScore(skunkRide), 
-										skunkScore.get(skunkUp).getTotalScore(), skunkRide);	
+					message = message + players.get(intClientSkunkSseId).scoreMove(skunkUp,
+										skunkScore.get(skunkUp).getRideScore(skunkRide),
+										skunkScore.get(skunkUp).getTotalScore(), skunkRide);
 				}
 			}
 			if (scoreRide < 1) {
 				// ride is over, change correspondent S K U N K letter
-				message = message + players.get(intClientSkunkSseId).skunkTitleMove(skunkRide); 
+				message = message + players.get(intClientSkunkSseId).smokeLetterMove(skunkRide); 
 				skunkRide = skunkRide + 1;
 			}
 			if (skunkRide > 5) {
@@ -414,30 +422,30 @@ public class SkunkGame extends HttpServlet {
 			}
 		}
 	}
-	
+
 	public void goSkunk(int intClientSkunkSseId, String clientSkunkId, String clientSkunkAction) {
 		System.out.println(" ####### S K U N K #######" + scoreRide);
-		
+
 		// forces dice face 0, what will show 1 (boss)
-		for (int i = 0; i < 3; i++) {	
+		for (int i = 0; i < 3; i++) {
 			System.out.println(" ####### loop forcing dice 0 #######" + i);
 			dice[i].setDiceValue(dice[i].rollDice(0));
 			message = message + players.get(intClientSkunkSseId).diceMove(clientSkunkId, clientSkunkAction, dice[i]);
 		}
-		message = message + players.get(intClientSkunkSseId).setDiceButtonsMove(0); 
-		
+		message = message + players.get(intClientSkunkSseId).setDiceButtonsMove(0);
+
 		sendUpdateToAll(message);
 		message = "";
-		
+
 		findWinners(skunksChosen);
-		
+
 		for (String winner : winners) {
 			if (skunkScore.get(winner).getTotalScore() == this.winnerScore) {
-				message = message + players.get(intClientSkunkSseId).winnerScoreMove(winner); 
+				message = message + players.get(intClientSkunkSseId).winnerScoreMove(winner);
 			}
 		}
 	}
-	
+
 	public void findWinners(Set<String> skunksChosen) {
 
 		winnerScore = 0;
@@ -555,4 +563,3 @@ public class SkunkGame extends HttpServlet {
 	}
 
 }
-

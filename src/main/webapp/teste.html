@@ -4,102 +4,23 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" media="all" href="/styles/smoke.css" />
 <link rel="shortcut icon" href="/images/favicon.ico">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+
 <title>SKUNK Game</title>
 </head>
-<body onload="setSkunkSmell()">
-<style>
-body {
-	margin: 0;
-	padding: 0;
-}
-section {
-	height: 100vh;
-	background: #000;
-}
-section:before {
-	content: ' ';
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: #f5b32b;
-	mix-blend-mode: color;
-	pointer-events: none;
-}
-video {
-	object-fit: cover;
-	z-index: 1;
-}
-h1 {
-	margin: 0;
-	padding: 0;
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	width: 100%;
-	text-align: center;
-	color: #ddd;
-	font-size: 5em;
-	font-family: sans-serif;
-	letter-spacing: 0.8em;
-}
-h1 span {
-	z-index: -1;
-	opacity: 0;
-	display: inline-block;
-	animation: animate 1s linear forwards;
-}
-@keyframes animate {
-	0%
-	{
-		opacity: 0;
-		transform: rotateY(90deg);
-		filter: blur(10px);
-	}
-	500%
-	{
-		opacity: .5;
-		transform: rotateY(45deg);
-		filter: blur(5px);
-	}
-	100%
-	{
-		opacity: 1;
-		transform: rotateY(0deg);
-		filter: blur(0px);
-	}
-}
-h1 span:nth-child(1) {
-	animation-delay: 1s;
-}
-h1 span:nth-child(2) {
-	animation-delay: 2.5s;
-}
-h1 span:nth-child(3) {
-	animation-delay: 4s;
-}
-h1 span:nth-child(4) {
-	animation-delay: 5.5s;
-}
-h1 span:nth-child(5) {
-	animation-delay: 7s;
-}
-</style>
+<body onload='smokeAll()'>
 <section>
-		<video id="skunk_smell" src="file:///Users/paulonegrao/Documents/Power/bcit/COMP1451/skunkgame/src/main/webapp/images/smoke.mp4" autoplay muted></video>
+		<video id="skunk_smoke" src="images/smoke1.mp4" type="video/mp4" muted class=""></video>
 		<h1>
-			<span>S</span>
-			<span>K</span>
-			<span>U</span>
-			<span>N</span>
-			<span>K</span>
+			<span id="s1" onclick="smokeLetter('s1')" data_start="0" data_stop=".5">S</span>
+			<span id="k1" onclick="smokeLetter('k1')" data_start="1.2" data_stop="1.20001">K</span>
+			<span id="u1" onclick="smokeLetter('u1')" data_start="2.1" data_stop="2.1">U</span>
+			<span id="n1" onclick="smokeLetter('n1')" data_start="3" data_stop="3">N</span>
+			<span id="k2" onclick="smokeLetter('k2')" data_start="4" data_stop="4">K</span>
 		</h1>
 </section>
-<script>
-function setSkunkSmell() { 
-  skunk_smell.playbackRate = 0.6;
-} 
-</script> 
+<script src="/js/smoke.js"></script>
 </body>
 </html>

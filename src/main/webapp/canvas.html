@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" media="all" href="styles/canvas.css" />
+<link rel="shortcut icon" href="images/favicon.ico">
+
+ <script src="js/jquery.min.js"></script>
+
+<title>SKUNK Game</title>
+</head>
+<body>
+
+	<div class="offset3" id="canvas_output">
+	    <video id="video" style="display:none;" autoplay>
+<!--	        <source src="images/slides/compressed_stacked3.mp4" type='video/mp4; codecs="avc1.42E01E"' />
+-->			<source src="images/slides/videoblack.mp4" type='video/mp4;' />
+	    </video>
+<!--	    <canvas width="1024" height="1536" id="buffer"></canvas>
+	    <canvas width="1024" height="768" id="output"></canvas> -->
+			<canvas width="640" height="720" id="buffer" style="border: 3px solid blue;"></canvas>
+			<canvas width="640" height="360" id="output" style="border: 3px solid red;"></canvas>
+	</div>
+
+		<div id="bora" style="width: 40px; height: 20px; background-color: yellow;"> bora....</div>
+<script src="js/mycanvas.js"></script>
+</body>
+</html>

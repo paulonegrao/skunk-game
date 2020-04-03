@@ -4,6 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+
 <link rel="stylesheet" media="all" href="/styles/sk.css" />
 <link rel="stylesheet" media="all" href="/styles/dice.css" />
 <link rel="stylesheet" media="all" href="/styles/smoke.css" />
@@ -16,9 +20,7 @@
 
 	<div id="container">
 
-	<div>Choose your SkinK</div>
-
-
+	<div>Choose your Skin</div>
 		<div id="overlay">
 			<div class=box>
 				<div id="cube1" class="cube1">
@@ -45,11 +47,11 @@
 					<div class="cube3_face cube3_face_top"><img src="/images/treis.png"></div>
 					<div class="cube3_face cube3_face_bottom"><img src="/images/quatro.png"></div>
 				</div>
-			
+
 			</div>
 
 		</div>
-	
+
 		<div class="box">
 			<div>
 				<button id="skunk1_choose" class="on"
@@ -94,26 +96,18 @@
 				</button>
 			</div>
 		</div>
-	<!--  	
-		<div class="box">
-			<div class="normal">S</div>
-			<div id="sk_letter_2" class="normal">K</div>
-			<div id="sk_letter_3" class="normal">U</div>
-			<div id="sk_letter_4" class="normal">N</div>
-			<div class="normal">K</div>
-		</div> -->
-		<div>
+
 		<section>
-		<video src=“/images/smoke.mp4” autoplay muted></video>
-			<h1 id="skunk_title">
-				<span>S</span>
-				<span>K</span>
-				<span>U</span>
-				<span>N</span>
-				<span>K</span>
-			</h1>
+				<video id="skunk_smoke" src="images/smoke1.mp4" type="video/mp4" muted class=""></video>
+				<h1>
+					<span id="letter1" onclick="smokeLetter('letter1')" data_start="0" data_stop=".5">S</span>
+					<span id="letter2" onclick="smokeLetter('letter2')" data_start="1.2" data_stop="1.20001">K</span>
+					<span id="letter3" onclick="smokeLetter('letter3')" data_start="2.1" data_stop="2.1">U</span>
+					<span id="letter4" onclick="smokeLetter('letter4')" data_start="3" data_stop="3">N</span>
+					<span id="letter5" onclick="smokeLetter('letter5')" data_start="4" data_stop="4">K</span>
+				</h1>
 		</section>
-		</div>
+
 		<div class="box">
 			<div>
 				<button id="skunk1_play" class="off"
@@ -140,7 +134,7 @@
 			</div>
 			<div>
 				<button id="skunk5_play" class="off"
-					onclick="skunkMove('skunk5', 'down')">  
+					onclick="skunkMove('skunk5', 'down')">
 					<img src="images/dot.png" alt="skunk 5">
 				</button>
 			</div>
@@ -157,7 +151,7 @@
 				</button>
 			</div>
 		</div>
-		
+
 		<div class="box">
 			<div id="skunk1_score">
 				<div id="skunk1_score_ride" class="box on">
@@ -189,7 +183,7 @@
 				</div>
 				<div id="skunk3_score_total" class="score_total on"></div>
 			</div>
-			
+
 			<div>
 				<div>
 					<button id="play_finish" class="off"
@@ -198,7 +192,7 @@
 					</button>
 				</div>
 			</div>
-			
+
 			<div id="skunk5_score">
 				<div id="skunk5_score_ride" class="box on">
 					<div class="score_ride"></div>
@@ -230,7 +224,7 @@
 				<div id="skunk7_score_total" class="score_total on"></div>
 			</div>
 		</div>
-		
+
 		<div>
 			<div>
 				<button id="dice1" class="off"
@@ -251,19 +245,15 @@
 				</button>
 			</div>
 		</div>
-</body>
+<script src="/js/smoke.js"></script>
 <script>
-
-
-
 	var eventSource = null;
 	var clientInitialSkunkId = "skunk0";
 
 	var clientSkunkSseId = getCookie("skunkSseId");
 	var clientSkunkGameId = getCookie("skunkGameId");
 	var clientSkunkId = getCookie("skunkId");
-	var skunkCookie = "skunkSseId=0&skunkId=" + clientInitialSkunkId
-			+ "&skunkGameId=0";
+	var skunkCookie = "skunkSseId=0&skunkId=" + clientInitialSkunkId + "&skunkGameId=0";
 
 	if ((clientSkunkSseId != null) && (clientSkunkSseId.length > 0)) {
 		if ((clientSkunkGameId != null) && (clientSkunkGameId.length > 0)) {
@@ -278,6 +268,7 @@
 
 	function sseSkunkGame() {
 		console.log("sseSkunkGame...");
+		smokeAll();
 		if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
 			source = new EventSource('http://localhost:8080/SkunkGame?' + skunkCookie);
 		} else {
@@ -369,5 +360,5 @@
 	}
 
 </script>
-
+</body>
 </html>
